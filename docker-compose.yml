@@ -1,25 +1,25 @@
 version: "3.9"
 
 services:
-  api:
-    container_name: ProjetoFinalApi
+  app:
+    container_name: Social-Dev-Institute_api_m4
     build: .
     ports:
-      - 3000:3000
+      - $PORT:$PORT
     env_file:
       - .env
     depends_on:
-      db:
+      postgres:
         condition: service_healthy
     command: bash -c "yarn typeorm migration:run -d src/data-source && yarn dev"
     volumes:
       - .:/app
 
-  db:
-    container_name: ProjetoFinalDb
-    image: postgres:14-alpine
+  postgres:
+    container_name: Social-Dev-Institute_db
+    image: postgres:latest
     ports:
-      - 5431:5432
+      - $PGPORT:$PGPORT
     env_file:
       - .env
     healthcheck:
