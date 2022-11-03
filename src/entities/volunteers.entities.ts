@@ -22,12 +22,12 @@ class Volunteers {
   @Column({ length: 11 })
   telephone: string
 
-  @Exclude()
   @Column({ length: 60 })
+  @Exclude()
   password: string
 
   @OneToMany(() => VolunteerCampaigns, volunteer => volunteer.volunteer_id)
-  volunteer_id: VolunteerCampaigns[]
+  volunteer_id?: VolunteerCampaigns[]
 }
 
 export default Volunteers
