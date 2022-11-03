@@ -15,7 +15,7 @@ const volunteersCreateController = async (req: Request, res: Response) => {
     telephone: volunteerCreated.telephone
   }
 
-  return res.status(201).json(volunteerVisible)
+  return res.status(201).json({ volunteerVisible })
 }
 
 export { volunteersCreateController }
