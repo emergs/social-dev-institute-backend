@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {  Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Campaigns } from "./campaign.entities";
 
 @Entity("Address")
 export class Address {
@@ -19,4 +20,8 @@ export class Address {
 
   @Column({ length: 2 })
   state: string;
+
+  @ManyToOne(() => Campaigns)
+  campaigns: Campaigns
+
 }
