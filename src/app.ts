@@ -11,6 +11,10 @@ app.use(express.json());
 
 app.use("/register", volunteersRoutes)
 
+app.use("/volunteers", volunteersRoutes)
+
+app.use("/voluntary", volunteersRoutes)
+
 app.use("/teste", (resp, res) => {
   return res.status(201).json({ ok: "tudo ok" });
 });
@@ -18,6 +22,5 @@ app.use("/teste", (resp, res) => {
 app.use('/homeless', homelessRoutes);
 
 app.use(handleErroMiddleware)
-
 
 export default app;

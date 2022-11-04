@@ -6,10 +6,10 @@ export class Campaigns {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
-    @Column({length: 100})
+    @Column({ length: 100 })
     name: string
 
-    @Column({default: true})
+    @Column({ default: true })
     isActive: boolean
 
     @CreateDateColumn()
@@ -20,5 +20,4 @@ export class Campaigns {
 
     @OneToMany(() => Address, address => address.campaigns)
     address: Address[]
-
 }
