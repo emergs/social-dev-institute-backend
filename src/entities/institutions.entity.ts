@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Homeless } from "./homeless.entity"
 
 @Entity('institutions')
 export class Institutions{
@@ -23,4 +24,7 @@ export class Institutions{
 
   @Column({length:60})
   password: string
+
+  @OneToMany(() => Homeless, (homeless) => homeless.institution)
+  homeless: Homeless[]
 }

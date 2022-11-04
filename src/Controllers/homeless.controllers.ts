@@ -4,9 +4,9 @@ import createHomelessService from "../Services/homeless/createHomeless.service";
 
 const createHomelessController = async (req: Request, res: Response) => {
   try {
-    const { name, age, picture } = req.body;
+    const { name, age, picture , institution} = req.body;
 
-    const createdHomeless = await createHomelessService({name, age, picture});
+    const createdHomeless = await createHomelessService({name, age, picture, institution});
 
     return res.status(201).json(createdHomeless);
   } catch(err) {

@@ -11,7 +11,7 @@ interface IHomelessRequest {
   name: string;
   age: string;
   picture?: string;
-  // institution: string;
+  institution: string;
 };
 
 interface IHomelessUpdate {

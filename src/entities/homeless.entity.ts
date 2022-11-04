@@ -1,4 +1,5 @@
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import { Institutions } from './institutions.entity';
 
 @Entity('homeless')
 class Homeless {
@@ -19,6 +20,9 @@ class Homeless {
 
   @Column({type: 'text', nullable: true})
   picture: string | null;
+
+  @ManyToOne(() => Institutions, (instituition) => instituition.homeless)
+  institution: Institutions;
 };
 
 export { Homeless };
