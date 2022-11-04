@@ -1,0 +1,50 @@
+import { Request, Response } from "express"
+import { IVolunteerRequest } from "../interfaces/volunteers"
+import volunteersCreateService from "../Services/volunteers/volunteersCreate.service"
+import volunteersListService from "../Services/volunteers/volunteersList.service"
+import volunteersUpdateService from "../Services/volunteers/volunteersUpdate.service"
+
+const volunteersCreateController = async (req: Request, res: Response) => {
+  const volunteer = req.body
+
+  const volunteerCreated = await volunteersCreateService(volunteer)
+
+  const volunteerVisible = {
+    id: volunteerCreated.id,
+    name: volunteerCreated.name,
+    age: volunteerCreated.age,
+    email: volunteerCreated.email,
+    cpf: volunteerCreated.cpf,
+    telephone: volunteerCreated.telephone
+  }
+
+  return res.status(201).json(volunteerVisible)
+}
+
+const volunteersListController = async (req: Request, res: Response) => {
+  const volunteers = await volunteersListService()
+
+  const newArray = volunteers.map(voluntary => {
+    const newVoluntary = {
+      id: voluntary.id,
+      name: voluntary.name,
+      age: voluntary.age,
+      email: voluntary.email,
+      cpf: voluntary.cpf,
+      telephone: voluntary.telephone
+    }
+    return newVoluntary
+  })
+
+  return res.status(200).json(newArray)
+}
+
+const volunteersUpdateController = async (req: Request, res: Response) => {
+  const voluntary: IVolunteerRequest = req.body
+  const id: string = req.params.id
+
+  const updatedUser = await volunteersUpdateService(id, voluntary)
+
+  return res.status(200).json(updatedUser)
+}
+export { volunteersCreateController, volunteersListController, volunteersUpdateController }
