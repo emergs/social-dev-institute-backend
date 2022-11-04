@@ -18,7 +18,6 @@ interface IHomelessUpdate {
   name?: string;
   age?: string;
   picture?: string;
-  institution?: string;
 };
 
 export { IHomeless, IHomelessRequest, IHomelessUpdate };
