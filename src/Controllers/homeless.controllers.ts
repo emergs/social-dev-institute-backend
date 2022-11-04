@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AppError, handleError } from "../errors/appError";
 import { IHomelessUpdate } from "../interfaces/homeless";
 import createHomelessService from "../Services/homeless/createHomeless.service";
+import deleteHomelessService from "../Services/homeless/deleteHomeless.service";
 import getByIdService from "../Services/homeless/getById.service";
 import listHomelessService from "../Services/homeless/listHomeless.service";
 import updateHomelessService from "../Services/homeless/updatedHomeless.service";
@@ -54,4 +55,18 @@ const updateHomelessController = async (req: Request, res: Response) => {
   };
 };
 
-export { createHomelessController, listHomelessController, getByIdController, updateHomelessController };
+const deleteHomelessController = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const deleteUser = await deleteHomelessService(id);
+
+    return res.status(204).send()
+  } catch(err) {
+    if (err instanceof AppError) {
+      handleError(err, res);
+    };
+  };
+};
+
+export { createHomelessController, listHomelessController, getByIdController, updateHomelessController, deleteHomelessController };
