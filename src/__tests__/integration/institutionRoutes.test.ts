@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm'
-import app from '../../../app'
-import AppDataSource from '../../../data-source'
+import app from '../../app'
+import AppDataSource from '../../data-source'
 import request from 'supertest'
-import { mockedInstitution } from '../../mocks/institutions.mocks'
+import { mockedInstitution } from '../mocks/institutions.mocks'
 
 describe("/register/institution", () => {
   let connection: DataSource
@@ -35,16 +35,4 @@ describe("/register/institution", () => {
       expect(response.status).toBe(201)        
   })
 
-  test("POST /register/institution -  Não deve permitir cadastrar uma instituição com um CNPJ já cadastrado.",async () => {
-      const response = await request(app).post('/users').send(mockedUser)
-
-      expect(response.body).toHaveProperty("message")
-      expect(response.status).toBe(400)
-           
-  })
-
-  test("POST /register/institution -  should not be able to create a user that already exists",async () => {})
-
-  test("POST /register/institution -  should not be able to create a user that already exists",async () => {})
-
-  test("POST /register/institution -  should not be able to create a user that already exists",async () => {})
+ 
