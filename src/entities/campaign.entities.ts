@@ -7,11 +7,12 @@ export class Campaigns {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
-    @Column({length: 100})
+    @Column({ length: 100 })
     name: string
 
-    @Column({default: true})
-    isAlive: boolean
+
+    @Column({ default: true })
+    isActive: boolean
 
     @CreateDateColumn()
     date_creation: Date
