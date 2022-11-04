@@ -1,4 +1,6 @@
 import AppDataSource from "../../data-source";
+import Volunteers from "../../entities/volunteers.entities";
+import { Institutions } from "../../entities/institutions.entity";
 import { IUserLogin } from "../../interfaces/users";
 import { compareSync } from "bcrypt";
 import { AppError } from "../../errors/appError";
@@ -6,8 +8,8 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 const createSessionService = async ({ email, password }: IUserLogin) => {
-  const volunteerRepository = AppDataSource.getRepository(Volunteer);
-  const intitutionRepository = AppDataSource.getRepository(Institution);
+  const volunteerRepository = AppDataSource.getRepository(Volunteers);
+  const intitutionRepository = AppDataSource.getRepository(Institutions);
 
   const volunteer = await volunteerRepository.find();
   const institution = await intitutionRepository.find();
