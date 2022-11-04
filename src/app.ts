@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import "express-async-errors";
 import express from "express";
-import institutionRoutes from "./Router/institution.routes";
+import institutionRoutes from "./Router/institutions.routes";
 
 const app = express();
 app.use(express.json());
