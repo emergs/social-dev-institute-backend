@@ -10,7 +10,7 @@ export class Institutions{
   @Column({length:50})
   name: string
   
-  @Column({length:14, unique:true})
+  @Column({length:18, unique:true})
   cnpj: string
   
   @Column({length:150})
