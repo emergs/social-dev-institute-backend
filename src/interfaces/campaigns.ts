@@ -1,7 +1,10 @@
+//import { Institutions } from "../entities/institutions.entity";
 import { IAddress } from "./address";
 
 export interface ICampaignsRequest {
-  name: string;
+  name: string,
+  address: IAddress,
+  institutoId: string
 }
 
 export interface ICampaigns {
@@ -10,8 +13,8 @@ export interface ICampaigns {
   isAlive: boolean;
   date_creation: string;
   date_update: string;
+  address: IAddress,
+  institutionId: string
+
 }
 
-export interface ICampaignsCreate extends ICampaigns {
-  address: IAddress;
-}
