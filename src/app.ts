@@ -6,8 +6,11 @@ import volunteersRoutes from "./Router/volunteers.routes";
 import handleErroMiddleware from "./Middlewares/handleErro.middleware";
 import homelessRoutes from "./Router/homeless.routes";
 
+<<<<<<< HEAD
 import addressRouter from "./Router/address.routes";
 
+=======
+>>>>>>> 98a6e98 (fix: alteração das interfaces)
 const app = express();
 
 app.use(express.json());

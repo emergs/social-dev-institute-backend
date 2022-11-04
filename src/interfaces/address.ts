@@ -1,4 +1,3 @@
-import { ICampaigns } from "./campaigns";
 
 export interface IAddress {
   id?: string;
@@ -7,5 +6,6 @@ export interface IAddress {
   complement?: string;
   city: string;
   state: string;
-  campaigns_id?: ICampaigns;
+
 }
+
