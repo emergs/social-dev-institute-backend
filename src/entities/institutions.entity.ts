@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Campaigns } from "./campaign.entities"
 import { Homeless } from "./homeless.entity"
 
 @Entity('institutions')
@@ -27,4 +28,8 @@ export class Institutions{
 
   @OneToMany(() => Homeless, (homeless) => homeless.institution)
   homeless: Homeless[]
+
+  @OneToMany(() => Campaigns, campaigns => campaigns.institution)
+  campaigns:Campaigns[]
+
 }

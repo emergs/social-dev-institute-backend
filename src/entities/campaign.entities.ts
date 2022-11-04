@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm'
 import { Address } from './address.entities'
+import { Institutions } from './institutions.entity'
 
 @Entity("campaigns")
 export class Campaigns {
@@ -9,15 +10,20 @@ export class Campaigns {
     @Column({ length: 100 })
     name: string
 
+
     @Column({ default: true })
     isActive: boolean
 
     @CreateDateColumn()
-    createdAt: Date
+    date_creation: Date
 
     @UpdateDateColumn()
-    updateAt: Date
+    date_update: Date
 
     @OneToMany(() => Address, address => address.campaigns)
     address: Address[]
+
+    @ManyToOne(() => Institutions)
+    institution: Institutions
+
 }

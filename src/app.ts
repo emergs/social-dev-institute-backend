@@ -6,9 +6,7 @@ import volunteersRoutes from "./Router/volunteers.routes";
 import sessionRoutes from "./Router/sessions.routes";
 import handleErroMiddleware from "./Middlewares/handleErro.middleware";
 import homelessRoutes from "./Router/homeless.routes";
-
 import addressRouter from "./Router/address.routes";
-
 
 const app = express();
 app.use(express.json());
