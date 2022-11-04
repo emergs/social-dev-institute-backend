@@ -1,0 +1,48 @@
+import AppDataSource from "../../data-source";
+import { IUserLogin } from "../../interfaces/users";
+import { compareSync } from "bcrypt";
+import { AppError } from "../../errors/appError";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
+
+const createSessionService = async ({ email, password }: IUserLogin) => {
+  const volunteerRepository = AppDataSource.getRepository(Volunteer);
+  const intitutionRepository = AppDataSource.getRepository(Institution);
+
+  const volunteer = await volunteerRepository.find();
+  const institution = await intitutionRepository.find();
+
+  const accountVolunteer = volunteer.find((user) => user.email === email);
+  const accountIntitution = institution.find((user) => user.email === email);
+
+  let account;
+
+  accountVolunteer
+    ? (account = accountVolunteer)
+    : (account = accountIntitution);
+
+  if (!account) {
+    throw new AppError(403, "Wrong email/password");
+  }
+
+  if (!compareSync(password, account.password)) {
+    throw new AppError(403, "Wrong email/password");
+  }
+
+  const token = jwt.sign(
+    {
+      email: email,
+      id: account.id,
+    },
+
+    process.env.SECRET_KEY as string,
+    {
+      expiresIn: "24h",
+      subject: account.id,
+    }
+  );
+
+  return token;
+};
+
+export default createSessionService;

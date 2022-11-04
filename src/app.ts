@@ -5,15 +5,17 @@ import volunteersRoutes from "./Router/volunteers.routes";
 
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "./errors/appError";
+import sessionRoutes from "./Router/sessions.routes";
 
 const app = express();
 app.use(express.json());
 
-app.use("/register", volunteersRoutes)
+app.use("/register", volunteersRoutes);
 
 app.use("/teste", (resp, res) => {
   return res.status(201).json({ ok: "tudo ok" });
 });
+app.use("/login", sessionRoutes);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
