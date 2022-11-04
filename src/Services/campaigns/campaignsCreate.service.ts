@@ -13,7 +13,9 @@ const campaignsCreateService = async(data: ICampaigns) => {
 
     const { name, isAlive, address, institutionId } = data
     
-    const institution = await institutionRepository.findOneBy({id: institutionId})
+    const institution = await institutionRepository.findOne({
+      where: { id: institutionId}
+    })
     if(!institution){
       throw new AppError(404, "Institution no existe")
     }
@@ -26,24 +28,22 @@ const campaignsCreateService = async(data: ICampaigns) => {
     }
    // cadastrar mais de um endereço
 
-    const newAddress: IAddress = addressRepository.create({...address})
+    const newAddress = addressRepository.create({...address})
     
     await addressRepository.save(newAddress)
 
-    const campaign = {
+    
+    const campaign = new Campaigns()
+     campaign.name= name
+     campaign.isAlive = isAlive
+     campaign.address = [newAddress]
+     campaign.institution = institution
+     campaign.date_creation = new Date()
+     campaign.date_update = new Date()
 
-      name,
-      isAlive,
-      address: newAddress,
-      institution: institution,
-      date_creation: new Date(),
-      date_update: new Date(),
-        
-    }
-
-    const newCampaigns = campaignsRepository.create(campaign)
-    await campaignsRepository.save(newCampaigns)
-    return newCampaigns
+    campaignsRepository.create(campaign)
+    await campaignsRepository.save(campaign)
+    return campaign
 }
 
 export default campaignsCreateService

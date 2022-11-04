@@ -1,4 +1,4 @@
-import {  Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import {  Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { Campaigns } from "./campaign.entities";
 
 @Entity("Address")
@@ -21,7 +21,7 @@ export class Address {
   @Column({ length: 2 })
   state: string;
 
-  @ManyToOne(() => Campaigns)
+  @ManyToOne(() => Campaigns, {eager: true})@JoinColumn()
   campaigns: Campaigns
 
 }

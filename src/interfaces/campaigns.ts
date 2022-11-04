@@ -1,4 +1,4 @@
-import { Institutions } from "../entities/institutions.entity";
+//import { Institutions } from "../entities/institutions.entity";
 import { IAddress } from "./address";
 
 export interface ICampaignsRequest {
@@ -14,7 +14,7 @@ export interface ICampaigns {
   date_creation: string;
   date_update: string;
   address: IAddress,
-  institutionId: Institutions
+  institutionId: string
 
 }
 
