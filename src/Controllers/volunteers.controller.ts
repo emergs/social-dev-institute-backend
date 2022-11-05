@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { IVolunteerRequest } from "../interfaces/volunteers"
 import volunteersCreateService from "../Services/volunteers/volunteersCreate.service"
+import volunteersDeleteService from "../Services/volunteers/volunteersDelete.service"
 import volunteersListService from "../Services/volunteers/volunteersList.service"
 import volunteerLoginService from "../Services/volunteers/volunteersLogin.service"
 import volunteersUpdateService from "../Services/volunteers/volunteersUpdate.service"
@@ -57,9 +58,21 @@ const volunteersUpdateController = async (req: Request, res: Response) => {
 
   return res.status(200).json(updatedUser)
 }
+
+const volunteersDeleteController = async (req: Request, res: Response) => {
+  const { id } = req.params
+
+  const voluntaryDeleted = await volunteersDeleteService(id)
+  return res.status(204).json({
+    message: "Voluntary deleted"
+  })
+
+}
+
 export {
   volunteersCreateController,
   volunteersListController,
   volunteersUpdateController,
-  volunteersLoginController
+  volunteersLoginController,
+  volunteersDeleteController
 }

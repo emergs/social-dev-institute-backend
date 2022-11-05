@@ -102,4 +102,38 @@ describe("Cadastra um voluntário", () => {
     expect(response.body).not.toHaveProperty("password")
 
   })
+
+  test("DELETE /volunteers/:id -> Não deve deletar um voluntario sem estar autenticado", async () => {
+    const voluntaryLoginResponse = await request(app).post("/volunteers/login").send(volunteerLogin);
+    const voluntaryTobeDeleted = await request(app).get('/volunteers').set("Authorization", `Bearer ${voluntaryLoginResponse.body.token}`)
+
+    const response = await request(app).delete(`/volunteers/${voluntaryTobeDeleted.body[0].id}`)
+
+    expect(response.body).toHaveProperty("message")
+    expect(response.status).toBe(401)
+
+  })
+
+  test("DELETE -> /voluteers/:id -> Não deve deletar um voluntario com o id invalido", async () => {
+    await request(app).post('/volunteers').send(volunteerRequest)
+
+    const voluntaryLoginResponse = await request(app).post("/volunteers/login").send(volunteerLogin);
+
+    const response = await request(app).delete(`/volunteers/13970660-5dbe-423a-9a9d-5c23b37943cf`).set("Authorization", `Bearer ${voluntaryLoginResponse.body.token}`)
+    expect(response.status).toBe(404)
+    expect(response.body).toHaveProperty("message")
+
+  })
+
+  test("DELETE /volunteers/:id -> Deve ser possivel deletar um voluntario", async () => {
+    await request(app).post('/volunteers').send(volunteerRequest)
+
+    const voluntaryLoginResponse = await request(app).post("/volunteers/login").send(volunteerLogin);
+    const voluntaryTobeDeleted = await request(app).get('/volunteers').set("Authorization", `Bearer ${voluntaryLoginResponse.body.token}`)
+
+    const response = await request(app).delete(`/volunteers/${voluntaryTobeDeleted.body[0].id}`).set("Authorization", `Bearer ${voluntaryLoginResponse.body.token}`)
+
+    expect(response.status).toBe(204)
+
+  })
 })
