@@ -5,7 +5,7 @@ const campaignsListService = async (): Promise<Campaigns[]> => {
   const campaignsRepository = AppDataSource.getRepository(Campaigns);
 
   const campaigns = await campaignsRepository.find({
-    relations: { address: true },
+    relations: { address: true, institution: true },
     loadEagerRelations: false,
   });
 

@@ -18,7 +18,7 @@ const updateCampaignsService = async (
   });
 
   if (!findCampaigns) {
-    throw new AppError(404, "User not found");
+    throw new AppError(404, "campaigns not found");
   }
   if (name == undefined) throw new AppError(400, "missing date");
 

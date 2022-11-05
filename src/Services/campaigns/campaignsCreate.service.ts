@@ -14,11 +14,21 @@ const campaignsCreateService = async (data: ICampaigns) => {
 
   const institution = await institutionRepository.findOne({
     where: { id: institutionId },
+    relations: { campaigns: true },
   });
 
   if (!institution) {
     throw new AppError(400, "institution does not exist");
   }
+
+  institution.campaigns.forEach((curretCampaigns) => {
+    if (curretCampaigns.name == name)
+      throw new AppError(400, "Campaign already exists");
+  });
+
+  console.log(institution);
+
+  // const existCampaigns = institutionRepository.find({where: {}})
 
   addressArray.forEach((currentobject) => {
     if (

@@ -7,7 +7,7 @@ const campaignsListServiceById = async (id: string): Promise<Campaigns> => {
 
   const campaigns = await campaignsRepository.findOne({
     where: { id },
-    relations: { address: true },
+    relations: { address: true, institution: true },
     loadEagerRelations: false,
   });
 

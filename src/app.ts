@@ -15,11 +15,9 @@ app.use(express.json());
 
 app.use("/login", sessionRoutes);
 app.use("/register/institution", institutionRoutes);
-app.use("/register", volunteersRoutes);
 app.use("/homeless", homelessRoutes);
 app.use("/address", addressRouter);
 app.use("/volunteers", volunteersRoutes);
-
 app.use("/campaign", campaignsRoutes);
 
 app.use(handleErroMiddleware);
