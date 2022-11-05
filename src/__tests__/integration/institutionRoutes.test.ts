@@ -20,7 +20,7 @@ describe("/register/institution", () => {
   })
 
   test("POST /register/institution -  Deve permitir cadastrar uma instituição",async () => {
-      const response = await request(app).post('/users').send(mockedInstitution)
+      const response = await request(app).post('/register/institution').send(mockedInstitution)
 
       expect(response.body).toHaveProperty("id")
       expect(response.body).toHaveProperty("name")
@@ -28,7 +28,7 @@ describe("/register/institution", () => {
       expect(response.body).toHaveProperty("address")
       expect(response.body).toHaveProperty("cnpj")
       expect(response.body).toHaveProperty("phone")
-      //expect(response.body).not.toHaveProperty("password")
+      expect(response.body).not.toHaveProperty("password")
       expect(response.body.name).toEqual("Billy")
       expect(response.body.email).toEqual("billy@mail.com")
       expect(response.body.cnpj).toEqual("12345678912345")

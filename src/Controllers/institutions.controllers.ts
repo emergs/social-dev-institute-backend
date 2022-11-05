@@ -2,11 +2,12 @@ import { Request, Response } from "express"
 import createInstitutionService from "../Services/institutions/createInstitution.service"
 import deleteInstitutionService from "../Services/institutions/deleteInstitution.service"
 import updateInstitutionService from "../Services/institutions/updateInstitution.service"
+import { instanceToPlain } from "class-transformer"
 
 const createInstitutionController = async (req:Request, res:Response)=>{
   const data = req.body
   const institution = await createInstitutionService(data)
-  res.status(201).json(institution)
+  res.status(201).json(instanceToPlain(institution))
 }
 
 const updateInstitutionController = async (req:Request, res:Response)=>{
