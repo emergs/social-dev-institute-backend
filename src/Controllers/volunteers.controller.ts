@@ -1,5 +1,10 @@
 import { Request, Response } from "express"
+import { IVolunteerRequest } from "../interfaces/volunteers"
 import volunteersCreateService from "../Services/volunteers/volunteersCreate.service"
+import volunteersDeleteService from "../Services/volunteers/volunteersDelete.service"
+import volunteersListService from "../Services/volunteers/volunteersList.service"
+import volunteerLoginService from "../Services/volunteers/volunteersLogin.service"
+import volunteersUpdateService from "../Services/volunteers/volunteersUpdate.service"
 
 const volunteersCreateController = async (req: Request, res: Response) => {
   const volunteer = req.body
@@ -18,4 +23,56 @@ const volunteersCreateController = async (req: Request, res: Response) => {
   return res.status(201).json(volunteerVisible)
 }
 
-export { volunteersCreateController }
+const volunteersLoginController = async (req: Request, res: Response) => {
+  const { email, password } = req.body
+  console.log(email)
+  const token = await volunteerLoginService({ email, password })
+
+
+  return res.status(200).json({ token })
+}
+
+const volunteersListController = async (req: Request, res: Response) => {
+  const volunteers = await volunteersListService()
+
+  const newArray = volunteers.map(voluntary => {
+    const newVoluntary = {
+      id: voluntary.id,
+      name: voluntary.name,
+      age: voluntary.age,
+      email: voluntary.email,
+      cpf: voluntary.cpf,
+      telephone: voluntary.telephone
+    }
+    return newVoluntary
+  })
+
+  return res.status(200).json(newArray)
+}
+
+const volunteersUpdateController = async (req: Request, res: Response) => {
+  const voluntary: IVolunteerRequest = req.body
+  const id: string = req.params.id
+
+  const updatedUser = await volunteersUpdateService(id, voluntary)
+
+  return res.status(200).json(updatedUser)
+}
+
+const volunteersDeleteController = async (req: Request, res: Response) => {
+  const { id } = req.params
+
+  const voluntaryDeleted = await volunteersDeleteService(id)
+  return res.status(204).json({
+    message: "Voluntary deleted"
+  })
+
+}
+
+export {
+  volunteersCreateController,
+  volunteersListController,
+  volunteersUpdateController,
+  volunteersLoginController,
+  volunteersDeleteController
+}

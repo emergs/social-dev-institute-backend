@@ -7,3 +7,7 @@ export interface IVolunteerRequest {
   password: string
 }
 
+export interface IVolunteerLogin {
+  email: string
+  password: string
+}

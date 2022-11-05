@@ -34,5 +34,6 @@ describe("/register/institution", () => {
       expect(response.body.cnpj).toEqual("12345678912345")
       expect(response.status).toBe(201)        
   })
+})
 
  
