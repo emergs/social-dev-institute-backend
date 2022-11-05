@@ -1,4 +1,3 @@
-import { IInstitutions } from "../interfaces/institutions";
 import createInstitutionService from "../Services/institutions/createInstitution.service";
 import updateInstitutionService from "../Services/institutions/updateInstitution.service";
 
