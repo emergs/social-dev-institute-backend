@@ -2,9 +2,9 @@
 import { IAddress } from "./address";
 
 export interface ICampaignsRequest {
-  name: string,
-  address: IAddress,
-  institutoId: string
+  name: string;
+  address: IAddress;
+  institutoId: string;
 }
 
 export interface ICampaigns {
@@ -13,8 +13,6 @@ export interface ICampaigns {
   isAlive: boolean;
   date_creation: string;
   date_update: string;
-  address: IAddress,
-  institutionId: string
-
+  address: IAddress[];
+  institutionId: string;
 }
-

@@ -1,6 +1,18 @@
 import { Router } from "express";
-import { campaignsCreateController } from "../Controllers/campaigns.controller";
+import {
+  campaignDeleteController,
+  campaignsCreateController,
+  campaignsListController,
+  campaignsListServiceByIdController,
+  updateCampaignsController,
+} from "../Controllers/campaigns.controller";
 
-const campaignsRoutes = Router()
+const campaignsRoutes = Router();
 
-campaignsRoutes.post("/campaigns", campaignsCreateController)
+campaignsRoutes.post("", campaignsCreateController);
+campaignsRoutes.get("", campaignsListController);
+campaignsRoutes.get("/:id", campaignsListServiceByIdController);
+campaignsRoutes.delete("/:id", campaignDeleteController);
+campaignsRoutes.patch("/:id", updateCampaignsController);
+
+export default campaignsRoutes;

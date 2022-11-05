@@ -9,7 +9,7 @@ const campaignsDeleteService = async (id: string): Promise<void> => {
   });
 
   if (!findCampaigns) {
-    throw new AppError(404, "User is already inactive");
+    throw new AppError(401, "id not found");
   }
 
   if (!findCampaigns?.isActive) {
