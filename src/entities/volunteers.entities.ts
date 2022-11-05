@@ -22,9 +22,6 @@ class Volunteers {
   @Column({ length: 11 })
   telephone: string
 
-  @Column({ default: true })
-  isActive: boolean
-
   @Column({ length: 60 })
   @Exclude()
   password: string

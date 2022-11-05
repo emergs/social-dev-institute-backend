@@ -12,12 +12,10 @@ const app = express();
 app.use(express.json());
 
 app.use("/login", sessionRoutes);
-app.use("/register", volunteersRoutes)
 app.use('/register/institution', institutionRoutes);
 app.use("/homeless", homelessRoutes);
 app.use("/address", addressRouter);
-app.use("/volunteers", volunteersRoutes)
-
+app.use("/volunteers", volunteersRoutes);
 app.use(handleErroMiddleware)
 
 export default app;
