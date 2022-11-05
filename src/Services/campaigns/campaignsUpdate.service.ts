@@ -1,31 +1,54 @@
 import AppDataSource from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { Campaigns } from "../../entities/campaign.entities";
-import { ICampaignsRequest } from "../../interfaces/campaigns";
+import { Institutions } from "../../entities/institutions.entity";
 
 const updateCampaignsService = async (
-  { name }: ICampaignsRequest,
-  id: string
+  name: string,
+  id: string,
+  institution: string
 ): Promise<Campaigns> => {
   const campaignsRepository = AppDataSource.getRepository(Campaigns);
-  const findCampaigns = await campaignsRepository.findOneBy({
-    id,
+  const InstitutionsRepository = AppDataSource.getRepository(Institutions);
+
+  const findCampaigns = await campaignsRepository.findOne({
+    where: {
+      id,
+    },
   });
 
   if (!findCampaigns) {
     throw new AppError(404, "User not found");
   }
+  if (name == undefined) throw new AppError(400, "missing date");
 
-  await campaignsRepository.update(id, {
-    id: findCampaigns.id,
-    name: name ? name : findCampaigns.name,
-    isActive: findCampaigns.isActive,
+  const institutionData = await InstitutionsRepository.findOne({
+    where: { id: institution },
   });
-  const campaign = await campaignsRepository.findOneBy({
-    // instituição
-    id,
+
+  if (!institutionData && institution !== undefined)
+    throw new AppError(400, "institution not found");
+
+  await campaignsRepository
+    .createQueryBuilder()
+    .update(Campaigns)
+    .set({
+      name,
+      institution: institutionData!,
+    })
+    .where("id = :id", { id })
+    .execute();
+
+  const updateCampaigns = await campaignsRepository.findOne({
+    where: {
+      id,
+    },
+    relations: { address: true, institution: true },
+    loadEagerRelations: false,
   });
-  return campaign!;
+  updateCampaigns?.institution;
+
+  return updateCampaigns!;
 };
 
 export default updateCampaignsService;
