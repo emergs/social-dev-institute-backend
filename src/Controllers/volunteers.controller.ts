@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { IVolunteerRequest } from "../interfaces/volunteers"
+import voluntaryListService from "../Services/volunteers/voluntaryList.service"
 import volunteersCreateService from "../Services/volunteers/volunteersCreate.service"
 import volunteersDeleteService from "../Services/volunteers/volunteersDelete.service"
 import volunteersListService from "../Services/volunteers/volunteersList.service"
@@ -69,10 +70,28 @@ const volunteersDeleteController = async (req: Request, res: Response) => {
 
 }
 
+const voluntaryListController = async (req: Request, res: Response) => {
+  const { id } = req.params
+
+  const voluntary = await voluntaryListService(id)
+
+  const newVoluntary = {
+    id: voluntary.id,
+    name: voluntary.name,
+    age: voluntary.age,
+    email: voluntary.email,
+    cpf: voluntary.cpf,
+    telephone: voluntary.telephone
+  }
+  return res.status(200).json({ newVoluntary })
+
+}
+
 export {
   volunteersCreateController,
   volunteersListController,
   volunteersUpdateController,
   volunteersLoginController,
-  volunteersDeleteController
+  volunteersDeleteController,
+  voluntaryListController
 }
