@@ -20,7 +20,6 @@ const updateCampaignsService = async (
   if (!findCampaigns) {
     throw new AppError(404, "campaigns not found");
   }
-  if (name == undefined) throw new AppError(400, "missing date");
 
   const institutionData = await InstitutionsRepository.findOne({
     where: { id: institution },
@@ -33,8 +32,8 @@ const updateCampaignsService = async (
     .createQueryBuilder()
     .update(Campaigns)
     .set({
-      name,
-      institution: institutionData!,
+      name: name ? name : findCampaigns.name,
+      institution: institution ? institutionData! : findCampaigns.institution,
     })
     .where("id = :id", { id })
     .execute();
