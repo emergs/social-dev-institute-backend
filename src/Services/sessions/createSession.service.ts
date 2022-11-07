@@ -24,7 +24,7 @@ const createSessionService = async ({ email, password }: IUserLogin) => {
     : (account = accountIntitution);
 
   if (!account) {
-    throw new AppError(403, "Wrong email/password");
+    throw new AppError(403, "Account not found");
   }
 
   if (!compareSync(password, account.password)) {
