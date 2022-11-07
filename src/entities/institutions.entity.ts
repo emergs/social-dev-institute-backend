@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { Campaigns } from "./campaign.entities"
 import { Homeless } from "./homeless.entity"
+import { Exclude } from "class-transformer"
 
 @Entity('institutions')
 export class Institutions{
@@ -24,6 +25,7 @@ export class Institutions{
   email: string
 
   @Column({length:60})
+  @Exclude()
   password: string
 
   @OneToMany(() => Homeless, (homeless) => homeless.institution)

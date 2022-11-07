@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm'
-import app from '../../../app'
-import AppDataSource from '../../../data-source'
+import app from '../../app'
+import AppDataSource from '../../data-source'
 import request from 'supertest'
-import { mockedInstitution } from '../../mocks/institutions.mocks'
+import { mockedInstitution } from '../mocks/institutions.mocks'
 
 describe("/register/institution", () => {
   let connection: DataSource
@@ -20,7 +20,7 @@ describe("/register/institution", () => {
   })
 
   test("POST /register/institution -  Deve permitir cadastrar uma instituição",async () => {
-      const response = await request(app).post('/users').send(mockedInstitution)
+      const response = await request(app).post('/register/institution').send(mockedInstitution)
 
       expect(response.body).toHaveProperty("id")
       expect(response.body).toHaveProperty("name")
@@ -28,7 +28,7 @@ describe("/register/institution", () => {
       expect(response.body).toHaveProperty("address")
       expect(response.body).toHaveProperty("cnpj")
       expect(response.body).toHaveProperty("phone")
-      //expect(response.body).not.toHaveProperty("password")
+      expect(response.body).not.toHaveProperty("password")
       expect(response.body.name).toEqual("Billy")
       expect(response.body.email).toEqual("billy@mail.com")
       expect(response.body.cnpj).toEqual("12345678912345")
@@ -36,16 +36,4 @@ describe("/register/institution", () => {
   })
 })
 
-//   test("POST /register/institution -  Não deve permitir cadastrar uma instituição com um CNPJ já cadastrado.",async () => {
-//       const response = await request(app).post('/users').send(mockedUser)
-
-//       expect(response.body).toHaveProperty("message")
-//       expect(response.status).toBe(400)
-           
-//   })
-
-//   test("POST /register/institution -  should not be able to create a user that already exists",async () => {})
-
-//   test("POST /register/institution -  should not be able to create a user that already exists",async () => {})
-
-//   test("POST /register/institution -  should not be able to create a user that already exists",async () => {})
+ 
