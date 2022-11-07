@@ -73,6 +73,34 @@ describe("Cadastra um voluntário", () => {
 
   })
 
+  test("GET /volunteers/:id -> Não deve listar os voluntarios sem autenticação", async () => {
+    const response = await request(app).get('/volunteers/:id')
+
+    expect(response.body).toHaveProperty("message")
+    expect(response.status).toBe(401)
+
+  })
+
+  test("GET /volunteers/:id -> Deve listar um voluntario", async () => {
+    const voluntaryLoginResponse = await request(app).post("/volunteers/login").send(volunteerLogin)
+    const token = `Bearer ${voluntaryLoginResponse.body.token}`
+
+    const voluntaryTobeUpdate = await request(app).get('/volunteers').set("Authorization", token)
+    const voluntaryTobeUpdateId = voluntaryTobeUpdate.body[0].id
+
+    const response = await request(app).get(`/volunteers/${voluntaryTobeUpdateId}`).set("Authorization", token).send(volunteerLogin)
+
+    expect(response.status).toBe(200)
+    expect(response.body).toHaveProperty("id")
+    expect(response.body).toHaveProperty("cpf")
+    expect(response.body).toHaveProperty("age")
+    expect(response.body).toHaveProperty("name")
+    expect(response.body).toHaveProperty("email")
+    expect(response.body).toHaveProperty("telephone")
+    expect(response.body).not.toHaveProperty("password")
+
+  })
+
   test("PATCH /volunteers/:id -> Não deve ser possivel atualizar um voluntario sem autorização", async () => {
     const voluntaryLoginResponse = await request(app).post("/volunteers/login").send(volunteerLogin);
     const voluntaryTobeUpdate = await request(app).get('/volunteers').set("Authorization", `Bearer ${voluntaryLoginResponse.body.token}`)

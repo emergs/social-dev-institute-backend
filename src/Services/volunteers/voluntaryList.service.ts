@@ -5,6 +5,8 @@ import { AppError } from "../../errors/appError"
 const voluntaryListService = async (id: string) => {
   const volunteersRepository = AppDataSource.getRepository(Volunteers)
 
+  console.log(id)
+
   const voluntary = await volunteersRepository.findOneBy({ id })
 
   if (!voluntary) {

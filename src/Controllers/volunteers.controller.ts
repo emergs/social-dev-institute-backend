@@ -83,7 +83,7 @@ const voluntaryListController = async (req: Request, res: Response) => {
     cpf: voluntary.cpf,
     telephone: voluntary.telephone
   }
-  return res.status(200).json({ newVoluntary })
+  return res.status(200).json(newVoluntary)
 
 }
 
