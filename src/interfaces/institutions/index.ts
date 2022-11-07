@@ -4,5 +4,6 @@ export interface IInstitutions{
   address:string,
   phone:string,
   email:string,
+  isActive:boolean,
   password:string
 }
