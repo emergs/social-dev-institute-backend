@@ -24,6 +24,9 @@ export class Institutions{
   @Column({length:60, unique:true})
   email: string
 
+  @Column({default:true})
+  isActive:boolean
+
   @Column({length:60})
   @Exclude()
   password: string
