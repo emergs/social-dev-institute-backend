@@ -26,10 +26,6 @@ const campaignsCreateService = async (data: ICampaigns) => {
       throw new AppError(400, "Campaign already exists");
   });
 
-  console.log(institution);
-
-  // const existCampaigns = institutionRepository.find({where: {}})
-
   addressArray.forEach((currentobject) => {
     if (
       currentobject.city == undefined ||
