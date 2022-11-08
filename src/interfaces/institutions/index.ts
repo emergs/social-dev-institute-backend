@@ -7,3 +7,8 @@ export interface IInstitutions{
   isActive:boolean,
   password:string
 }
+
+export interface IInstitutionsLogin{
+  email:string,
+  password:string
+}
