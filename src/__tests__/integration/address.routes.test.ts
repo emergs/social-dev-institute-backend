@@ -3,7 +3,7 @@ import app from "../../app";
 import { DataSource } from "typeorm";
 import AppDataSource from "../../data-source";
 
-describe("Ler os endereçõs", () => {
+describe("Ler os endereços", () => {
   let connection: DataSource;
 
   beforeAll(async () => {

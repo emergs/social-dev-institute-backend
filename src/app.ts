@@ -8,17 +8,18 @@ import handleErroMiddleware from "./Middlewares/handleErro.middleware";
 import homelessRoutes from "./Router/homeless.routes";
 import addressRouter from "./Router/address.routes";
 
+import campaignsRoutes from "./Router/campaigns.routes";
+
 const app = express();
 app.use(express.json());
 
 app.use("/login", sessionRoutes);
-app.use("/register", volunteersRoutes)
-app.use('/register/institution', institutionRoutes);
+app.use("/register/institution", institutionRoutes);
 app.use("/homeless", homelessRoutes);
 app.use("/address", addressRouter);
-app.use("/volunteers", volunteersRoutes)
-app.use("/voluntary", volunteersRoutes)
+app.use("/volunteers", volunteersRoutes);
+app.use("/campaign", campaignsRoutes);
 
-app.use(handleErroMiddleware)
+app.use(handleErroMiddleware);
 
 export default app;
