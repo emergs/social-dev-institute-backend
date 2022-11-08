@@ -3,8 +3,8 @@ import createInstitutionService from "../Services/institutions/createInstitution
 import deleteInstitutionService from "../Services/institutions/deleteInstitution.service"
 import updateInstitutionService from "../Services/institutions/updateInstitution.service"
 import { instanceToPlain } from "class-transformer"
-import listAllInstitutionsService from "../Services/institutions/listAllInstitutions.service"
 import listInstitutionProfileService from "../Services/institutions/listInstitutionProfile.service"
+import listAllInstitutionsService from "../Services/institutions/listAllInstitutions.service"
 
 const createInstitutionController = async (req:Request, res:Response)=>{
   const data = req.body
