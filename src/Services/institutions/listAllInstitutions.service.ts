@@ -6,8 +6,8 @@ const listAllInstitutionsService = async()=>{
   const institutionsRepository = AppDataSource.getRepository(Institutions)
   const institutions = institutionsRepository.find()
 
-  if(!institutions){
-    throw new AppError(404,'Institutions not found');
+  if((await institutions).length < 1){
+    throw new AppError(400,'No registered institution');
   }
 
   return institutions

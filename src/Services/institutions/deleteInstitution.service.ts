@@ -5,18 +5,14 @@ import { AppError } from '../../errors/appError'
 const deleteInstitutionService = async(id:string)=>{
   const institutionRepository = AppDataSource.getRepository(Institutions)
   const institution = await institutionRepository.findOneBy({id})
-  
-  if(!institution){
-    throw new AppError(404,"Institute Not Found");
-  }
 
-  if(institution.isActive === false){
+  if(institution!.isActive === false){
     throw new AppError(400,'Institution already isActive = false');
   }
 
-  institution.isActive = false
+  institution!.isActive = false
 
-  await institutionRepository.save(institution)
+  await institutionRepository.save(institution!)
 }
 
 export default deleteInstitutionService
