@@ -7,7 +7,7 @@ import {
   mockedInstitutionLogin,
   mockedVolunteersLogin,
 } from "../mocks/login.mocks";
-import { volunteerLogin, volunteerRequest } from "../mocks/volunteers.mocks.";
+import { volunteerRequest } from "../mocks/volunteers.mocks.";
 
 describe("/login", () => {
   let connection: DataSource;
@@ -30,7 +30,9 @@ describe("/login", () => {
   });
 
   test("POST /login -> Deve ser possivel realizar o login como voluntário", async () => {
-    const response = await request(app).post("/login").send(volunteerLogin);
+    const response = await request(app)
+      .post("/login")
+      .send(mockedVolunteersLogin);
 
     expect(response.body).toHaveProperty("token");
     expect(response.status).toBe(200);
