@@ -4,11 +4,18 @@ import deleteInstitutionService from "../Services/institutions/deleteInstitution
 import updateInstitutionService from "../Services/institutions/updateInstitution.service"
 import { instanceToPlain } from "class-transformer"
 import listAllInstitutionsService from "../Services/institutions/listAllInstitutions.service"
+import listInstitutionProfileService from "../Services/institutions/listInstitutionProfile.service"
 
 const createInstitutionController = async (req:Request, res:Response)=>{
   const data = req.body
   const institution = await createInstitutionService(data)
   res.status(201).json(instanceToPlain(institution))
+}
+
+const listInstitutionProfileController = async (req:Request, res:Response)=>{
+  const id = req.user.id
+  const institution = await listInstitutionProfileService(id)
+  res.status(200).json(instanceToPlain(institution))
 }
 
 const listAllInstitutionsController = async (req:Request, res:Response)=>{
@@ -29,4 +36,4 @@ const deleteInstitutionController = async (req:Request, res:Response)=>{
   res.status(204).send()
 }
 
-export {createInstitutionController, updateInstitutionController, deleteInstitutionController, listAllInstitutionsController}
+export {createInstitutionController, updateInstitutionController, deleteInstitutionController, listAllInstitutionsController, listInstitutionProfileController}
