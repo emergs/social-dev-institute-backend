@@ -13,11 +13,11 @@ const verifyCNPJAndEmailMiddleware = async(req:Request, res:Response, next:NextF
   const cnpjExists = data.find(institution=>institution.cnpj === cnpj)
    
   if(emailExists){
-    throw new AppError(400,'Email já cadastrado')
+    throw new AppError(400,'E-mail already registered')
   }
 
   if(cnpjExists){
-    throw new AppError(400,'CNPJ já cadastrado')
+    throw new AppError(400,'CNPJ already registered')
   }
 
   next()

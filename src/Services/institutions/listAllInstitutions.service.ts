@@ -7,7 +7,7 @@ const listAllInstitutionsService = async()=>{
   const institutions = institutionsRepository.find()
 
   if(!institutions){
-    throw new AppError(404,'Institutions not found');
+    throw new AppError(400,'No registered institution');
   }
 
   return institutions
