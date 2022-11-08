@@ -1,6 +1,6 @@
 import { IInstitutions, IInstitutionsLogin } from "../../interfaces/institutions";
 
-export const mockedInstitution : IInstitutions = {
+export const mockedInstitution: IInstitutions = {
   name: "Billy",
   email: "billy@mail.com",
   cnpj:"12345678912345",
@@ -25,7 +25,8 @@ export const mockedInstitutionDeleteLogin : IInstitutionsLogin = {
   password: "123456"
 }
 
-export const mockedInstitutionInvalidCNPJ : IInstitutions = {
+
+export const mockedInstitutionInvalidCNPJ: IInstitutions = {
   name: "Billy",
   email: "billy@mail.com",
   cnpj:"123456789123456789123",
@@ -39,3 +40,4 @@ export const mockedLogin : IInstitutionsLogin= {
   email: "billy@mail.com",
   password: "123456"
 }
+
