@@ -7,6 +7,6 @@ export const mockedInstitutionLogin: IUserLogin = {
 };
 
 export const mockedVolunteersLogin: IVolunteerLogin = {
-  email: "patrick.cordeiro@email.com",
+  email: "clayson@gmail.com",
   password: "1234",
 };
