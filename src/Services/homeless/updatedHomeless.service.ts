@@ -11,7 +11,7 @@ const updateHomelessService = async (id: string, { name, age, picture }: IHomele
   });
 
   if (!homelessToBeUpdated) {
-    throw new AppError(400, 'Person not found');
+    throw new AppError(404, 'Person not found');
   };
 
   await homelessRepository.update(

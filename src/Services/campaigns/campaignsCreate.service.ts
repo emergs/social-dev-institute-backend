@@ -18,12 +18,12 @@ const campaignsCreateService = async (data: ICampaigns) => {
   });
 
   if (!institution) {
-    throw new AppError(400, "institution does not exist");
+    throw new AppError(403, "institution does not exist");
   }
 
   institution.campaigns.forEach((curretCampaigns) => {
     if (curretCampaigns.name == name)
-      throw new AppError(400, "Campaign already exists");
+      throw new AppError(403, "Campaign already exists");
   });
 
   addressArray.forEach((currentobject) => {
@@ -32,14 +32,14 @@ const campaignsCreateService = async (data: ICampaigns) => {
       currentobject.state == undefined ||
       currentobject.road == undefined
     )
-      throw new AppError(400, "missing data addrees");
+      throw new AppError(403, "missing data addrees");
 
     if (currentobject.road.length > 100)
-      throw new AppError(400, "address road contains more than 100 characters");
+      throw new AppError(403, "address road contains more than 100 characters");
     else if (currentobject.city.length > 50)
-      throw new AppError(400, "address city contains more than 50 characters");
+      throw new AppError(403, "address city contains more than 50 characters");
     else if (currentobject.state.length > 2)
-      throw new AppError(400, "address state contains more than 2 characters");
+      throw new AppError(403, "address state contains more than 2 characters");
 
     if (
       currentobject.complement !== undefined &&
@@ -47,7 +47,7 @@ const campaignsCreateService = async (data: ICampaigns) => {
     ) {
       if (currentobject.complement.length > 120)
         throw new AppError(
-          400,
+          403,
           "address complement contains more than 120 characters"
         );
     } else if (
@@ -56,14 +56,14 @@ const campaignsCreateService = async (data: ICampaigns) => {
     ) {
       if (currentobject.number.length > 50)
         throw new AppError(
-          400,
+          403,
           "address number contains more than 50 characters"
         );
     }
   });
 
   if (name == undefined || isAlive == undefined)
-    throw new AppError(400, "missing data addrees");
+    throw new AppError(403, "missing data addrees");
 
   const campaign = new Campaigns();
   campaign.name = name;

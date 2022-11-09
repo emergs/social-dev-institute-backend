@@ -21,7 +21,7 @@ class Homeless {
   @Column({type: 'text', nullable: true})
   picture: string | null;
 
-  @ManyToOne(() => Institutions, (instituition) => instituition.homeless, {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  @ManyToOne(() => Institutions, (instituition) => instituition.homeless, {onDelete: 'CASCADE', onUpdate: 'CASCADE', eager: true})
   institution: Institutions;
 };
 

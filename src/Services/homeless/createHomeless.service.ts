@@ -7,12 +7,6 @@ import { IHomelessRequest } from "../../interfaces/homeless";
 const createHomelessService = async ({name, age, picture, institution}: IHomelessRequest): Promise<Homeless> => {
   const homelessRepository = AppDataSource.getRepository(Homeless);
   const institutionRepository = AppDataSource.getRepository(Institutions);
-
-  // const dataContent  = Object.keys(data);
-
-  // dataContent.map((elem) => {
-  //   if (!elem) throw new AppError(400, `${elem} is missing`);
-  // });
   
   if (!name) {
     throw new AppError(400, 'Name is missing');
@@ -26,9 +20,13 @@ const createHomelessService = async ({name, age, picture, institution}: IHomeles
     name: institution
   });
 
-  if (!institution || !institutionObj) {
-    throw new AppError(400, 'Institution not found');
-  };
+  if (!institution) {
+    throw new AppError(400, 'Institution is missing');
+  }
+
+  if (!institutionObj) {
+    throw new AppError(404, 'Institution not found');
+  };  
 
   const newHomeless = new Homeless();
   newHomeless.name = name;

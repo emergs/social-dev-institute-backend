@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { voluntaryListController, volunteersCreateController, volunteersDeleteController, volunteersListController, volunteersLoginController, volunteersUpdateController } from "../Controllers/volunteers.controller";
+import { voluntaryAddCampaignController, voluntaryListController, volunteersCreateController, volunteersDeleteController, volunteersListController, volunteersLoginController, volunteersUpdateController } from "../Controllers/volunteers.controller";
 import verifyTokenVoluntaryMiddleware from "../Middlewares/verifyTokenVoluntary.middleware";
 import verifyVoluntaryExists from "../Middlewares/verifyVoluntaryExists";
 
@@ -14,6 +14,12 @@ volunteersRoutes.post(
 volunteersRoutes.post(
   "/login",
   volunteersLoginController
+)
+
+volunteersRoutes.post(
+  "/AddCampaign/:id",
+  verifyTokenVoluntaryMiddleware,
+  voluntaryAddCampaignController
 )
 
 volunteersRoutes.get(
