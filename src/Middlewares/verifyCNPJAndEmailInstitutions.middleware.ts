@@ -11,6 +11,10 @@ const verifyCNPJAndEmailMiddleware = async(req:Request, res:Response, next:NextF
 
   const emailExists = data.find(institution=>institution.email === email)
   const cnpjExists = data.find(institution=>institution.cnpj === cnpj)
+
+  if(cnpj.length > 18){
+    throw new AppError(404,"Invalid CNPJ");
+  }
    
   if(emailExists){
     throw new AppError(400,'E-mail already registered')
