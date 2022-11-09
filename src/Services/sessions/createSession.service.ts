@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 const createSessionService = async ({ email, password }: IUserLogin) => {
+
+
   const volunteerRepository = AppDataSource.getRepository(Volunteers);
   const intitutionRepository = AppDataSource.getRepository(Institutions);
 
@@ -16,6 +18,8 @@ const createSessionService = async ({ email, password }: IUserLogin) => {
 
   const accountVolunteer = volunteer.find((user) => user.email === email);
   const accountIntitution = institution.find((user) => user.email === email);
+
+  console.log(accountIntitution)
 
   let account;
 
