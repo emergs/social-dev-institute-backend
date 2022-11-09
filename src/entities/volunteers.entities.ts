@@ -26,8 +26,8 @@ class Volunteers {
   @Exclude()
   password: string
 
-  @OneToMany(() => VolunteerCampaigns, volunteer => volunteer.volunteer_id)
-  volunteer_id?: VolunteerCampaigns[]
+  @OneToMany(() => VolunteerCampaigns, voCam => voCam.volunteer_id)
+  volunteerCampaigns: VolunteerCampaigns[]
 }
 
 export default Volunteers

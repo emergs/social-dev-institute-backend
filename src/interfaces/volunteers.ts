@@ -5,6 +5,7 @@ export interface IVolunteerRequest {
   email: string
   telephone: string
   password: string
+  campaigns_id: string
 }
 
 export interface IVolunteerLogin {
