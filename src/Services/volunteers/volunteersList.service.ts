@@ -4,7 +4,7 @@ import Volunteers from "../../entities/volunteers.entities"
 const volunteersListService = async () => {
   const volunteersRepository = AppDataSource.getRepository(Volunteers)
 
-  const volunteers = await volunteersRepository.find({ relations: { volunteerCampaigns: true } })
+  const volunteers = await volunteersRepository.find()
 
   return volunteers
 }
