@@ -6,7 +6,8 @@ export const volunteerRequest: IVolunteerRequest = {
   cpf: "40040040005",
   email: "clayson@gmail.com",
   telephone: "123456789",
-  password: "1234"
+  password: "1234",
+  campaigns_id: ""
 }
 
 export const volunteerUpdate: IVolunteerRequest = {
@@ -15,7 +16,8 @@ export const volunteerUpdate: IVolunteerRequest = {
   age: "89",
   telephone: "123456789",
   email: "josefa@gmail.com",
-  password: "1234"
+  password: "1234",
+  campaigns_id: ""
 }
 
 export const volunteerLogin: IVolunteerLogin = {

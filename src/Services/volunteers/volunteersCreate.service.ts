@@ -15,7 +15,6 @@ const volunteersCreateService = async (volunteer: IVolunteerRequest) => {
   newVolunteer.cpf = volunteer.cpf
   newVolunteer.email = volunteer.email
   newVolunteer.telephone = volunteer.telephone
-  newVolunteer.volunteer_id = []
   newVolunteer.password = password
 
   volunteersRepository.create(newVolunteer)

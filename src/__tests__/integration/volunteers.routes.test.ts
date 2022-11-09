@@ -3,6 +3,8 @@ import app from "../../app";
 import { DataSource } from "typeorm";
 import AppDataSource from "../../data-source";
 import { volunteerLogin, volunteerRequest } from "../mocks/volunteers.mocks.";
+import { mockedInstitution, mockedLogin } from "../mocks/institutions.mocks";
+import { mockedCampaigns } from "../mocks/campaigns.mocks";
 
 describe("Cadastra um voluntário", () => {
 
@@ -54,6 +56,45 @@ describe("Cadastra um voluntário", () => {
     expect(response.body).toHaveProperty("message")
     expect(response.status).toBe(403)
 
+  })
+
+  test("POST /volunteers/AddCampaign/:id -> Não deve criar sem autenticação", async () => {
+    const response = await request(app).post('/volunteers/AddCampaign/:id')
+
+    expect(response.body).toHaveProperty("message")
+    expect(response.status).toBe(401)
+
+  })
+
+  test("POST /volunteers/AddCampaign/:id -> Não deve criar sem autenticação", async () => {
+    const institution = await request(app)
+      .post("/register/institution")
+      .send(mockedInstitution);
+
+    const responseInstitu = await request(app).post("/login").send(mockedLogin);
+
+    const tokenInstitu = `Bearer ${responseInstitu.body.token}`;
+
+    mockedCampaigns.institutionId = institution.body.id;
+
+    const campaignRegister = await request(app)
+      .post("/campaign")
+      .send(mockedCampaigns)
+      .set("Authorization", tokenInstitu);
+
+    const voluntaryLoginResponse = await request(app).post("/volunteers/login").send(volunteerLogin)
+    const tokenVoluntary = `Bearer ${voluntaryLoginResponse.body.token}`
+
+
+    const response = await request(app).post(`/volunteers/AddCampaign/${campaignRegister.body.id}`).set("Authorization", tokenVoluntary).send(volunteerLogin)
+
+    expect(response.status).toBe(201)
+    expect(response.body).toHaveProperty("voluntaryId")
+    expect(response.body).toHaveProperty("voluntaryName")
+    expect(response.body).toHaveProperty("voluntaryEmail")
+    expect(response.body).toHaveProperty("voluntaryTelephone")
+    expect(response.body).toHaveProperty("campaignId")
+    expect(response.body).toHaveProperty("campaignName")
   })
 
   test("GET /volunteers -> Não deve listar os voluntarios sem autenticação", async () => {
