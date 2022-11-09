@@ -11,7 +11,7 @@ class VolunteerCampaigns {
   @CreateDateColumn()
   createAt: Date
 
-  @ManyToOne(() => Volunteers, { eager: true })
+  @ManyToOne(() => Volunteers, { eager: true, onDelete: "CASCADE", cascade: true })
   @JoinColumn()
   volunteer_id: Volunteers
 
