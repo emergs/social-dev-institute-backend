@@ -14,7 +14,7 @@ const getByIdService = async (id: string): Promise<Homeless> => {
   });
 
   if (!homeless) {
-    throw new AppError(400, "Person not found");
+    throw new AppError(404, "Person not found");
   }
 
   return homeless;
