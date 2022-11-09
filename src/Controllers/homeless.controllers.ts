@@ -6,6 +6,8 @@ import deleteHomelessService from "../Services/homeless/deleteHomeless.service";
 import getByIdService from "../Services/homeless/getById.service";
 import listHomelessService from "../Services/homeless/listHomeless.service";
 import updateHomelessService from "../Services/homeless/updatedHomeless.service";
+import { instanceToPlain } from "class-transformer"
+
 
 const createHomelessController = async (req: Request, res: Response) => {
   try {
@@ -24,7 +26,7 @@ const createHomelessController = async (req: Request, res: Response) => {
 const listHomelessController = async (req: Request, res: Response) => {
   const homelessList = await listHomelessService();
 
-  return res.status(200).json(homelessList);
+  return res.status(200).json(instanceToPlain(homelessList));
 };
 
 const getByIdController = async (req: Request, res: Response) => {
@@ -32,7 +34,7 @@ const getByIdController = async (req: Request, res: Response) => {
   try {
     const homeless = await getByIdService(id);
 
-    return res.status(200).json(homeless);
+    return res.status(200).json(instanceToPlain(homeless));
   } catch(err) {
     if (err instanceof AppError) {
       handleError(err, res);
@@ -47,7 +49,7 @@ const updateHomelessController = async (req: Request, res: Response) => {
 
     const updatedHomeless = await updateHomelessService(id, user);
 
-    return res.status(200).json(updatedHomeless);
+    return res.status(200).json(instanceToPlain(updatedHomeless));
   } catch(err) {
     if (err instanceof AppError) {
       handleError(err, res);
