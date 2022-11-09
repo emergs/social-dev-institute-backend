@@ -8,6 +8,10 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 const createSessionService = async ({ email, password }: IUserLogin) => {
+  if (!email || !password) {
+    throw new AppError(403, "Email and password are required!");
+  }
+
   const volunteerRepository = AppDataSource.getRepository(Volunteers);
   const intitutionRepository = AppDataSource.getRepository(Institutions);
 
