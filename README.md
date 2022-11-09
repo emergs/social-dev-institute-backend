@@ -4,12 +4,14 @@ POST /homeless/register
 
 Exemplo de corpo da requisição:
 
+```
 {
   "name": "José da Silva",
   "age": "35",
   "institution": "Amigos da rua", (deve ser uma instituição válida já cadastrada no banco de dados)
   "picture": "url da imagem", (se não for passado, terá seu valor definido como NULL no banco de dados)
 }
+```
 
 Exemplo de response:
 
