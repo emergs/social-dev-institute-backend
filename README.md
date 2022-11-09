@@ -61,7 +61,7 @@ POST base_url/login
 
 Listar o perfil da instituição logada
 
-## base_url/register/institution/profile
+## POST base_url/register/institution/profile
 
 ### Listar instituições logada
 
@@ -91,7 +91,7 @@ Listar o perfil da instituição logada
 
 Listar todas instituições
 
-## base_url/register/institution
+## GET base_url/register/institution
 
 ### Listar todas instituições cadastradas
 
@@ -144,7 +144,7 @@ Listar todas instituições
 
 Deletar um instituição
 
-## base_url/register/institution/profile
+## DELETE base_url/register/institution/profile
 
 ### Deletar uma instituição
 
@@ -190,7 +190,7 @@ Deletar um instituição
 
 Editar uma instituição
 
-## base_url/register/institution/profile
+## PTCH base_url/register/institution/profile
 
 ### Editar uma instituição
 
@@ -233,7 +233,7 @@ Editar uma instituição
 
 Criar institution
 
-## base_url/register/institution
+## POST base_url/register/institution
 
 ### Criar uma instituição
 
@@ -474,7 +474,7 @@ Status code 400 - ID required;
 
 <h2>Campaign<h2>
 
-base_url/campaign
+POST base_url/campaign
 
 ## Criar uma campanha
 
@@ -595,7 +595,7 @@ base_url/campaign
 }
 ```
 
-base_url/campaign
+GET base_url/campaign
 
 ## Lista todas as campanhas
 
@@ -639,7 +639,7 @@ base_url/campaign
 ]
 ```
 
-base_url/campaign/:id
+GET base_url/campaign/:id
 
 ## Pegar uma campanha especifica
 
@@ -695,7 +695,7 @@ base_url/campaign/:id
 }
 ```
 
-base_url/campaign/:id
+PTCH base_url/campaign/:id
 
 ## Atualizar uma campanha
 
@@ -768,7 +768,7 @@ base_url/campaign/:id
 }
 ```
 
-base_url/campaign/:id
+DELETE base_url/campaign/:id
 
 ## Deletar uma campanha
 
@@ -814,7 +814,7 @@ base_url/campaign/:id
 
 <h2>address<h2>
 
-base_url/address
+GET base_url/address
 
 ### Pegar todos os endereços
 
@@ -844,7 +844,7 @@ base_url/address
 ]
 ```
 
-base_url/address/:id
+GET base_url/address/:id
 
 ### Pegar um endereço
 
@@ -884,7 +884,7 @@ base_url/address/:id
 }
 ```
 
-base_url/address/:id
+PTCH base_url/address/:id
 
 ### Atualiza um endereçõ
 
@@ -942,6 +942,8 @@ base_url/address/:id
 <h2>Voluntary<h2>
 
 ###  Cria um novo voluntario
+POST BaseUrl/volunteers/register
+
 ###  Não necessita de autentificação
 ### Retorno esperado
 **Status 201**
@@ -997,6 +999,9 @@ base_url/address/:id
 
 ```
 ###  Atualiza um voluntario
+
+PTCH base_url/volunteers/:id
+
 ###  Necessita de autentificação
 ### Retorno esperado com autenticação
 **Status 200**
@@ -1029,6 +1034,9 @@ base_url/address/:id
 ```
 
 ###  Deleta um voluntario
+
+DELETE BaseUrl/volunteers/:id
+
 ###  Necessita de autentificação
 ### Retorno esperado com autenticação
 **Status 204**
@@ -1055,6 +1063,9 @@ base_url/address/:id
 ```
 
 ### Adiciona um voluntario a uma campanha
+
+POST BaseUrl/volunteers/AddCampaign/:IdCampanha
+
 ###  Necessita de autentificação
 ### Retorno esperado
 **Status 201**
@@ -1084,6 +1095,9 @@ base_url/address/:id
 ```
 
 ###  Lista todos voluntarios
+
+GET BaseUrl/volunteers
+
 ###  Necessita de autentificação
 ### Retorno esperado com autenticação
 **Status 200**
@@ -1118,6 +1132,9 @@ base_url/address/:id
 ```
 
 ###  Lista um voluntarios
+
+GET BaseUrl/volunteers/:ID
+
 ###  Necessita de autentificação
 ### Retorno esperado com autenticação
 **Status 200**
