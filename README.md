@@ -939,3 +939,203 @@ base_url/address/:id
 	"message": "Invalid token"
 }
 ```
+<h2>Voluntary<h2>
+
+###  Cria um novo voluntario
+###  Não necessita de autentificação
+### Retorno esperado
+**Status 201**
+```
+{
+ id: asdasfge
+ name: Pedro da Silva
+ idade: 21
+ cpf: 1234567889
+ email: pedro@gmail.com
+ telephone: 987654324
+},
+
+```
+### Retorno esperado com cpf ja cadastrado
+**Status 400**
+```
+{
+ message: "There is already a voluntary at this cpf"
+},
+
+```
+### Retorno esperado com email ja cadastrado
+**Status 400**
+```
+{
+ message: "There is already a voluntary at this email"
+},
+
+```
+
+###  Loga um novo voluntario 
+###  Não necessita de autentificação
+### Retorno esperado
+**Status 200**
+```
+{
+ id: asdasfge
+ name: Pedro da Silva
+ idade: 21
+ cpf: 1234567889
+ email: pedro@gmail.com
+ telephone: 987654321
+},
+
+```
+### Login incorreto
+**Status 403**
+```
+{
+ "message": "Invalid email or password"
+},
+
+```
+###  Atualiza um voluntario
+###  Necessita de autentificação
+### Retorno esperado com autenticação
+**Status 200**
+```
+{
+ id: asdasfge
+ name: Pedro da Silva
+ idade: 21
+ cpf: 1234567889
+ email: pedro@gmail.com
+ telephone: 987654321
+},
+
+```
+### Retorno esperado sem autenticação
+**Status 401**
+```
+{
+	"message": "Invalid token"
+},
+
+```
+### Voluntario não encontrado
+**Status 404**
+```
+{
+	"message": "User is not found"
+},
+
+```
+
+###  Deleta um voluntario
+###  Necessita de autentificação
+### Retorno esperado com autenticação
+**Status 204**
+```
+{
+  "message": "Voluntary deleted"
+},
+
+```
+### Retorno esperado sem autenticação
+**Status 401**
+```
+{
+	"message": "Invalid token"
+},
+
+```
+### Voluntario não encontrado
+**Status 404**
+```
+{
+	"message": "User is not found"
+},
+```
+
+### Adiciona um voluntario a uma campanha
+###  Necessita de autentificação
+### Retorno esperado
+**Status 201**
+```
+{
+	"voluntaryId": "018cd998-0679-4f53-adb5-70a65b088cfb",
+	"voluntaryName": "camila",
+	"voluntaryEmail": "camila@gmail.com",
+	"voluntaryTelephone": "123456789",
+	"campaignId": "748638d8-9e31-4185-b61a-ad4d34009069",
+	"campaignName": "Sem fome"
+},
+```
+### Retorno esperado sem autenticação
+**Status 401**
+```
+{
+	"message": "Invalid token"
+},
+```
+### Retorno esperado campanha invalida
+**Status 401**
+```
+{
+	"message": "Campaign not found"
+},
+```
+
+###  Lista todos voluntarios
+###  Necessita de autentificação
+### Retorno esperado com autenticação
+**Status 200**
+```
+[
+	{
+		"id": "018cd998-0679-4f53-adb5-70a65b088cfb",
+		"name": "camila",
+		"age": "34",
+		"email": "camla@gmail.com",
+		"cpf": "4004000152",
+		"telephone": "123456789",
+		"volunteerCampaigns": [
+			{
+				"id": "748638d8-9e31-4185-b61a-ad4d34009069",
+				"name": "Sem fome"
+			},
+			{
+				"id": "748638d8-9e31-4185-b61a-ad4d34009069",
+				"name": "Sem fome"
+			},	
+	}
+]
+
+```
+### Retorno esperado sem autenticação
+**Status 401**
+```
+{
+	"message": "Invalid token"
+},
+```
+
+###  Lista um voluntarios
+###  Necessita de autentificação
+### Retorno esperado com autenticação
+**Status 200**
+```
+{
+	"id": "018cd998-0679-4f53-adb5-70a65b088cfb",
+	"name": "camila",
+	"age": "34",
+	"email": "camla@gmail.com",
+	"cpf": "4004000152",
+	"telephone": "123456789"
+}
+
+```
+### Retorno esperado sem autenticação
+**Status 401**
+```
+{
+	"message": "Invalid token"
+},
+```

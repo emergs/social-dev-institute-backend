@@ -45,6 +45,13 @@ const volunteersListController = async (req: Request, res: Response) => {
       email: voluntary.email,
       cpf: voluntary.cpf,
       telephone: voluntary.telephone,
+      volunteerCampaigns: voluntary.volunteerCampaigns.map(camp => {
+        const newCampaing = {
+          id: camp.campaigns_id.id,
+          name: camp.campaigns_id.name
+        }
+        return newCampaing
+      })
     };
     return newVoluntary;
   });
@@ -82,6 +89,7 @@ const voluntaryListController = async (req: Request, res: Response) => {
     email: voluntary.email,
     cpf: voluntary.cpf,
     telephone: voluntary.telephone,
+    volunteerCampaigns: voluntary.volunteerCampaigns
   };
   return res.status(200).json(newVoluntary);
 };
