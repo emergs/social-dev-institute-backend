@@ -21,6 +21,8 @@ const createSessionService = async ({ email, password }: IUserLogin) => {
   const accountVolunteer = volunteer.find((user) => user.email === email);
   const accountIntitution = institution.find((user) => user.email === email);
 
+  console.log(accountIntitution);
+
   let account;
 
   accountVolunteer
