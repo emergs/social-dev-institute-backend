@@ -1,8 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm'
 import { Address } from './address.entities'
 import { Institutions } from './institutions.entity'
-import VolunteerCampaigns from './volunteerCampaigns.entities'
-import Volunteers from './volunteers.entities'
 
 @Entity("campaigns")
 export class Campaigns {
@@ -11,6 +9,7 @@ export class Campaigns {
 
     @Column({ length: 100 })
     name: string
+
 
     @Column({ default: true })
     isActive: boolean
@@ -27,6 +26,4 @@ export class Campaigns {
     @ManyToOne(() => Institutions)
     institution: Institutions
 
-    @OneToMany(() => VolunteerCampaigns, voCam => voCam.volunteer_id)
-    volunteerCampaigns: VolunteerCampaigns[]
 }

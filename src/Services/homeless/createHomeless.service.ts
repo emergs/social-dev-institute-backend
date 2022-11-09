@@ -26,9 +26,13 @@ const createHomelessService = async ({name, age, picture, institution}: IHomeles
     name: institution
   });
 
-  if (!institution || !institutionObj) {
-    throw new AppError(400, 'Institution not found');
-  };
+  if (!institution) {
+    throw new AppError(400, 'Institution is missing');
+  }
+
+  if (!institutionObj) {
+    throw new AppError(404, 'Institution not found');
+  };  
 
   const newHomeless = new Homeless();
   newHomeless.name = name;

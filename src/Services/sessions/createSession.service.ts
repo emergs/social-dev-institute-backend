@@ -12,6 +12,7 @@ const createSessionService = async ({ email, password }: IUserLogin) => {
     throw new AppError(403, "Email and password are required!");
   }
 
+
   const volunteerRepository = AppDataSource.getRepository(Volunteers);
   const intitutionRepository = AppDataSource.getRepository(Institutions);
 
@@ -20,8 +21,6 @@ const createSessionService = async ({ email, password }: IUserLogin) => {
 
   const accountVolunteer = volunteer.find((user) => user.email === email);
   const accountIntitution = institution.find((user) => user.email === email);
-
-  console.log(accountIntitution);
 
   let account;
 

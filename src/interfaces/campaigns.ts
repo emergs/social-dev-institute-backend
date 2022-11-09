@@ -1,6 +1,5 @@
 //import { Institutions } from "../entities/institutions.entity";
 import { IAddress } from "./address";
-import { IVolunteerRequest } from "./volunteers";
 
 export interface ICampaignsRequest {
   name: string;
